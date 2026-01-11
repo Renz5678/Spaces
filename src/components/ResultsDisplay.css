@@ -1,0 +1,534 @@
+.results-container {
+    margin-top: 3rem;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.results-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #000000;
+}
+
+.matrix-info {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.info-card {
+    background: #f8f8f8;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.info-card.highlight {
+    border-color: #000000;
+    background: #000000;
+}
+
+.info-card.highlight .info-label,
+.info-card.highlight .info-value {
+    color: #ffffff;
+}
+
+.info-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #666666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+}
+
+.info-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.rref-section {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #e0e0e0;
+    overflow-x: auto;
+}
+
+.rref-section h3 {
+    font-size: 1rem;
+    color: #666666;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.pivot-info {
+    text-align: center;
+    color: #666666;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.dimension-theorem {
+    background: #f8f8f8;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dimension-theorem h3 {
+    color: #000000;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.theorem-cards {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.theorem-card {
+    background: #ffffff;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theorem-card span:first-child {
+    color: #666666;
+    font-size: 0.85rem;
+}
+
+.theorem-value {
+    color: #000000;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.subspaces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.subspace-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 2px solid #000000;
+    transition: all 0.2s ease;
+}
+
+.subspace-card:hover {
+    box-shadow: 4px 4px 0px #000000;
+    transform: translate(-2px, -2px);
+}
+
+.subspace-indigo,
+.subspace-purple,
+.subspace-blue,
+.subspace-cyan {
+    border-color: #000000;
+    background: #ffffff;
+}
+
+.subspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.subspace-header h4 {
+    font-size: 1.1rem;
+    color: #000000;
+    margin: 0;
+}
+
+.subspace-symbol {
+    font-size: 1rem;
+    color: #666666;
+    font-style: italic;
+    font-family: 'Times New Roman', serif;
+}
+
+.subspace-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.dimension-badge {
+    background: #000000;
+    color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.description {
+    color: #666666;
+    font-size: 0.85rem;
+}
+
+.subspace-basis {
+    background: #f8f8f8;
+    border-radius: 4px;
+    padding: 1rem;
+    min-height: 80px;
+    overflow-x: auto;
+}
+
+.trivial-space {
+    color: #666666;
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+}
+
+.basis-label {
+    display: block;
+    color: #666666;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+.vector-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.vector-label {
+    color: #666666;
+    font-size: 0.9rem;
+    min-width: 40px;
+}
+
+.latex-display {
+    color: #000000;
+    overflow-x: auto;
+}
+
+.latex-display .katex {
+    font-size: 1.1em;
+}
+
+/* ========================================== */
+/* RESPONSIVE BREAKPOINTS                     */
+/* ========================================== */
+
+/* Tablet Landscape (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .results-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .subspaces-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+/* Tablet Portrait (600px - 767px) */
+@media (min-width: 600px) and (max-width: 767px) {
+    .results-container {
+        margin-top: 2rem;
+    }
+
+    .results-title {
+        font-size: 1.35rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .info-card {
+        padding: 0.875rem 1.5rem;
+    }
+
+    .info-value {
+        font-size: 1.35rem;
+    }
+
+    .subspaces-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .subspace-card {
+        padding: 1.25rem;
+    }
+}
+
+/* Large Phone (480px - 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+    .results-container {
+        margin-top: 1.75rem;
+    }
+
+    .results-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .matrix-info {
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .info-card {
+        padding: 0.75rem 1.25rem;
+    }
+
+    .info-label {
+        font-size: 0.65rem;
+    }
+
+    .info-value {
+        font-size: 1.25rem;
+    }
+
+    .rref-section {
+        padding: 1rem;
+    }
+
+    .dimension-theorem {
+        padding: 1rem;
+    }
+
+    .theorem-card {
+        padding: 0.75rem 1rem;
+    }
+
+    .theorem-card span:first-child {
+        font-size: 0.75rem;
+    }
+
+    .subspaces-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .subspace-card {
+        padding: 1rem;
+    }
+
+    .subspace-header h4 {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile Portrait (320px - 479px) */
+@media (max-width: 479px) {
+    .results-container {
+        margin-top: 1.5rem;
+    }
+
+    .results-title {
+        font-size: 1.15rem;
+        margin-bottom: 1rem;
+    }
+
+    .matrix-info {
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .info-card {
+        padding: 0.625rem 1rem;
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .info-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.05em;
+    }
+
+    .info-value {
+        font-size: 1.1rem;
+    }
+
+    .rref-section {
+        padding: 0.875rem;
+        margin-bottom: 1.25rem;
+        border-radius: 6px;
+    }
+
+    .rref-section h3 {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .pivot-info {
+        font-size: 0.8rem;
+        margin-top: 0.75rem;
+    }
+
+    .dimension-theorem {
+        padding: 0.875rem;
+        margin-bottom: 1.25rem;
+        border-radius: 6px;
+    }
+
+    .dimension-theorem h3 {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .theorem-cards {
+        gap: 0.5rem;
+    }
+
+    .theorem-card {
+        padding: 0.625rem 0.875rem;
+        flex: 1;
+        min-width: 140px;
+    }
+
+    .theorem-card span:first-child {
+        font-size: 0.7rem;
+    }
+
+    .theorem-value {
+        font-size: 0.85rem;
+    }
+
+    .subspaces-grid {
+        grid-template-columns: 1fr;
+        gap: 0.875rem;
+    }
+
+    .subspace-card {
+        padding: 1rem;
+        border-radius: 6px;
+    }
+
+    .subspace-card:hover {
+        box-shadow: 2px 2px 0px #000000;
+        transform: translate(-1px, -1px);
+    }
+
+    .subspace-header {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .subspace-header h4 {
+        font-size: 0.95rem;
+    }
+
+    .subspace-symbol {
+        font-size: 0.85rem;
+    }
+
+    .subspace-meta {
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .dimension-badge {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .description {
+        font-size: 0.75rem;
+    }
+
+    .subspace-basis {
+        padding: 0.75rem;
+        min-height: 60px;
+    }
+
+    .basis-label {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .vector-label {
+        font-size: 0.8rem;
+        min-width: 30px;
+    }
+
+    .latex-display .katex {
+        font-size: 0.95em;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-height: 500px) and (min-width: 480px) {
+    .results-container {
+        margin-top: 1rem;
+    }
+
+    .results-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .matrix-info {
+        margin-bottom: 1rem;
+    }
+
+    .subspaces-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .subspace-card {
+        padding: 0.75rem;
+    }
+}
+
+/* Extra Small Phones (< 320px) */
+@media (max-width: 319px) {
+    .results-title {
+        font-size: 1rem;
+    }
+
+    .info-card {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .info-value {
+        font-size: 1rem;
+    }
+
+    .subspace-card {
+        padding: 0.75rem;
+    }
+}

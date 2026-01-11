@@ -1,0 +1,379 @@
+.saved-matrices-page {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: calc(100vh - 200px);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.empty-icon {
+    color: var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.btn-go-home {
+    background: var(--accent-color);
+    color: var(--text-light);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-go-home:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* Matrices Grid */
+.matrices-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* Matrix Card */
+.matrix-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    position: relative;
+}
+
+.matrix-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.matrix-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.matrix-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.matrix-dims {
+    background: var(--bg-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Matrix Preview */
+.matrix-preview {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    min-height: 80px;
+}
+
+.matrix-grid {
+    display: grid;
+    gap: 0.25rem;
+    background: var(--bg-secondary);
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.matrix-cell {
+    background: var(--bg-primary);
+    padding: 0.35rem 0.5rem;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    border-radius: 3px;
+    min-width: 40px;
+}
+
+.matrix-ellipsis {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Card Footer */
+.matrix-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.matrix-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+.matrix-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.btn-load,
+.btn-delete {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 10;
+}
+
+.btn-load {
+    background: var(--accent-color);
+    color: var(--text-light);
+    border: none;
+}
+
+.btn-load:hover {
+    background: #333;
+    transform: scale(1.05);
+}
+
+.btn-delete {
+    background: transparent;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.btn-delete:hover {
+    background: #fef2f2;
+    border-color: #dc2626;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+    .matrices-grid {
+        justify-content: flex-start;
+    }
+}
+
+/* Tablet Landscape (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .saved-matrices-page {
+        padding: 1.5rem;
+    }
+
+    .matrices-grid {
+        gap: 1.25rem;
+    }
+
+    .matrix-card {
+        width: 300px;
+    }
+}
+
+/* Tablet Portrait (600px - 767px) */
+@media (min-width: 600px) and (max-width: 767px) {
+    .saved-matrices-page {
+        padding: 1.25rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .matrices-grid {
+        gap: 1rem;
+    }
+
+    .matrix-card {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .matrix-date {
+        min-width: 120px;
+    }
+}
+
+/* Mobile Landscape (480px - 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+    .saved-matrices-page {
+        padding: 1rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .matrix-card {
+        width: 100%;
+    }
+
+    .matrix-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .matrix-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Mobile Portrait (< 480px) */
+@media (max-width: 479px) {
+    .saved-matrices-page {
+        padding: 0.75rem;
+    }
+
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .matrices-grid {
+        gap: 0.75rem;
+    }
+
+    .matrix-card {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .matrix-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .matrix-name {
+        font-size: 1rem;
+    }
+
+    .matrix-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .matrix-date {
+        font-size: 0.75rem;
+        min-width: auto;
+    }
+
+    .matrix-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .btn-load,
+    .btn-delete {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .empty-state {
+        padding: 2rem 1rem;
+    }
+
+    .empty-icon svg {
+        width: 48px;
+        height: 48px;
+    }
+
+    .empty-state h3 {
+        font-size: 1.1rem;
+    }
+
+    .empty-state p {
+        font-size: 0.9rem;
+    }
+}

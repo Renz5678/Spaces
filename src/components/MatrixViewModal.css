@@ -1,0 +1,363 @@
+.matrix-view-modal {
+    max-width: 98vw !important;
+    width: 1600px !important;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.modal-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.matrix-dims-badge {
+    background: var(--accent-color);
+    color: var(--text-light);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.matrix-editor-section {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.matrix-editor-section h3,
+.results-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.unsaved-indicator {
+    color: #f59e0b;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-footer .modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+/* Save Prompt Modal */
+.save-prompt-modal {
+    max-width: 450px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.save-prompt-modal h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.save-prompt-modal p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.save-prompt-modal .modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-secondary {
+    padding: 0.75rem 1.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-color);
+    background: var(--bg-secondary);
+}
+
+/* Responsive Design */
+
+/* Large Tablet/Small Desktop (1024px - 1599px) */
+@media (min-width: 1024px) and (max-width: 1599px) {
+    .matrix-view-modal {
+        width: 95vw !important;
+        padding: 1.75rem;
+    }
+
+    .matrix-editor-section {
+        max-width: 800px;
+    }
+}
+
+/* Tablet Landscape (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .matrix-view-modal {
+        width: 95vw !important;
+        padding: 1.5rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .matrix-editor-section {
+        max-width: 700px;
+    }
+
+    .modal-body {
+        gap: 1.5rem;
+    }
+}
+
+/* Tablet Portrait (600px - 767px) */
+@media (min-width: 600px) and (max-width: 767px) {
+    .matrix-view-modal {
+        width: 95vw !important;
+        padding: 1.25rem;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.35rem;
+    }
+
+    .matrix-editor-section {
+        max-width: 100%;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .modal-footer .modal-actions {
+        width: 100%;
+    }
+
+    .modal-footer .modal-actions button {
+        flex: 1;
+    }
+}
+
+/* Mobile Landscape (480px - 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+    .matrix-view-modal {
+        width: 95vw !important;
+        padding: 1rem;
+        max-height: 85vh;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .matrix-dims-badge {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.75rem;
+    }
+
+    .matrix-editor-section h3,
+    .results-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .modal-body {
+        gap: 1.25rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .modal-footer .modal-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .modal-footer .modal-actions button {
+        width: 100%;
+    }
+
+    .save-prompt-modal {
+        max-width: 90vw;
+        padding: 1.5rem;
+    }
+
+    .save-prompt-modal .modal-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .save-prompt-modal .modal-actions button {
+        width: 100%;
+    }
+}
+
+/* Mobile Portrait (< 480px) */
+@media (max-width: 479px) {
+    .matrix-view-modal {
+        width: 95vw !important;
+        padding: 0.75rem;
+        max-height: 90vh;
+    }
+
+    .modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .matrix-dims-badge {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.6rem;
+    }
+
+    .matrix-editor-section h3,
+    .results-section h3 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .modal-body {
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding-top: 1rem;
+    }
+
+    .unsaved-indicator {
+        font-size: 0.85rem;
+    }
+
+    .modal-footer .modal-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .modal-footer .modal-actions button {
+        width: 100%;
+        padding: 0.65rem 1rem;
+    }
+
+    .save-prompt-modal {
+        max-width: 95vw;
+        padding: 1.25rem;
+    }
+
+    .save-prompt-modal h3 {
+        font-size: 1.25rem;
+    }
+
+    .save-prompt-modal p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .save-prompt-modal .modal-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .save-prompt-modal .modal-actions button {
+        width: 100%;
+    }
+
+    .btn-secondary {
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+    }
+}
