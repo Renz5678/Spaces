@@ -2,14 +2,6 @@
  * Application constants
  */
 
-export const API_CONFIG = {
-    BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
-    ENDPOINTS: {
-        COMPUTE: '/api/compute',
-        EXAMPLES: '/api/examples',
-    },
-};
-
 export const MATRIX_LIMITS = {
     MIN_DIMENSION: 1,
     MAX_DIMENSION: 5,

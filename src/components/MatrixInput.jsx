@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { parseMatrix, validateDimensions, createEmptyMatrix, resizeMatrix } from '../utils/matrixUtils';
 import { MATRIX_LIMITS } from '../constants';
 import './MatrixInput.css';
@@ -12,6 +12,8 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
     const [matrix, setMatrix] = useState(
         createEmptyMatrix(MATRIX_LIMITS.DEFAULT_ROWS, MATRIX_LIMITS.DEFAULT_COLS)
     );
+    const [computeSuccess, setComputeSuccess] = useState(false);
+    const computeButtonRef = useRef(null);
 
     useEffect(() => {
         if (initialMatrix && initialMatrix.length > 0) {
@@ -22,6 +24,14 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
             setMatrix(initialMatrix.map(row => row.map(v => String(v))));
         }
     }, [initialMatrix]);
+
+    // Reset success state when loading completes
+    useEffect(() => {
+        if (!isLoading && computeSuccess) {
+            const timer = setTimeout(() => setComputeSuccess(false), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [isLoading, computeSuccess]);
 
     const handleDimensionChange = useCallback((newRows, newCols) => {
         const validated = validateDimensions(
@@ -42,10 +52,37 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
         ));
     }, []);
 
-    const handleSubmit = useCallback(() => {
+    const handleSubmit = useCallback(async () => {
         try {
             const numericMatrix = parseMatrix(matrix);
-            onCompute(numericMatrix);
+            setComputeSuccess(false);
+
+            // Add button press animation
+            if (computeButtonRef.current) {
+                computeButtonRef.current.classList.add('btn-pressed');
+                setTimeout(() => {
+                    computeButtonRef.current?.classList.remove('btn-pressed');
+                }, 200);
+            }
+
+            // Await computation
+            const result = await onCompute(numericMatrix);
+
+            // Show success state if computation succeeded
+            if (result) {
+                setComputeSuccess(true);
+
+                // Smooth scroll to results after a brief delay
+                setTimeout(() => {
+                    const resultsElement = document.querySelector('.results-container');
+                    if (resultsElement) {
+                        resultsElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 300);
+            }
         } catch (error) {
             alert(error.message);
         }
@@ -82,6 +119,7 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
                             max={MATRIX_LIMITS.MAX_DIMENSION}
                             value={rows}
                             onChange={(e) => handleDimensionChange(parseInt(e.target.value) || 1, cols)}
+                            disabled={isLoading}
                         />
                     </label>
                     <label>
@@ -92,6 +130,7 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
                             max={MATRIX_LIMITS.MAX_DIMENSION}
                             value={cols}
                             onChange={(e) => handleDimensionChange(rows, parseInt(e.target.value) || 1)}
+                            disabled={isLoading}
                         />
                     </label>
                 </div>
@@ -106,6 +145,7 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
                                 }
                             }}
                             defaultValue=""
+                            disabled={isLoading}
                         >
                             <option value="" disabled>Load example...</option>
                             {examples.map((ex, idx) => (
@@ -118,7 +158,7 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
 
             <div className="matrix-grid-wrapper">
                 <div className="bracket left">[</div>
-                <div className="matrix-grid" style={gridStyle}>
+                <div className={`matrix-grid ${isLoading ? 'computing' : ''}`} style={gridStyle}>
                     {matrix.map((row, i) =>
                         row.map((cell, j) => (
                             <input
@@ -128,6 +168,7 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
                                 value={cell}
                                 onChange={(e) => handleCellChange(i, j, e.target.value)}
                                 placeholder="0"
+                                disabled={isLoading}
                             />
                         ))
                     )}
@@ -137,11 +178,28 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
 
             <div className="matrix-actions">
                 <button
-                    className="btn btn-primary"
+                    ref={computeButtonRef}
+                    className={`btn btn-primary ${isLoading ? 'loading' : ''} ${computeSuccess ? 'success' : ''}`}
                     onClick={handleSubmit}
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Computing...' : 'Compute Subspaces'}
+                    {isLoading ? (
+                        <>
+                            <svg className="spinner" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="31.4" strokeLinecap="round" />
+                            </svg>
+                            <span>Computing...</span>
+                        </>
+                    ) : computeSuccess ? (
+                        <>
+                            <svg className="checkmark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>Complete!</span>
+                        </>
+                    ) : (
+                        'Compute Subspaces'
+                    )}
                 </button>
                 <button
                     className="btn btn-secondary"

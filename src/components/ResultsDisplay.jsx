@@ -7,10 +7,10 @@ const ResultsDisplay = ({ results }) => {
     if (!results) return null;
 
     return (
-        <div className="results-container">
+        <div className="results-container fade-in">
             <h2 className="results-title">Fundamental Subspaces</h2>
 
-            <div className="matrix-info">
+            <div className="matrix-info" style={{ animationDelay: '0.1s' }}>
                 <div className="info-card">
                     <span className="info-label">Dimensions</span>
                     <span className="info-value">{results.matrix.rows} × {results.matrix.cols}</span>
@@ -21,13 +21,13 @@ const ResultsDisplay = ({ results }) => {
                 </div>
             </div>
 
-            <div className="rref-section">
+            <div className="rref-section" style={{ animationDelay: '0.2s' }}>
                 <h3>Row-Reduced Echelon Form (RREF)</h3>
                 <LaTeXDisplay latex={results.rref.latex} />
                 <p className="pivot-info">Pivot columns: {results.rref.pivots.map(p => p + 1).join(', ') || 'None'}</p>
             </div>
 
-            <div className="dimension-theorem">
+            <div className="dimension-theorem" style={{ animationDelay: '0.3s' }}>
                 <h3>Dimension Theorem Check</h3>
                 <div className="theorem-cards">
                     <div className="theorem-card">
@@ -42,30 +42,38 @@ const ResultsDisplay = ({ results }) => {
             </div>
 
             <div className="subspaces-grid">
-                <SubspaceCard
-                    name="Column Space"
-                    symbol="C(A)"
-                    data={results.column_space}
-                    color="indigo"
-                />
-                <SubspaceCard
-                    name="Row Space"
-                    symbol="C(Aᵀ)"
-                    data={results.row_space}
-                    color="purple"
-                />
-                <SubspaceCard
-                    name="Null Space"
-                    symbol="N(A)"
-                    data={results.null_space}
-                    color="blue"
-                />
-                <SubspaceCard
-                    name="Left Null Space"
-                    symbol="N(Aᵀ)"
-                    data={results.left_null_space}
-                    color="cyan"
-                />
+                <div style={{ animationDelay: '0.4s' }}>
+                    <SubspaceCard
+                        name="Column Space"
+                        symbol="C(A)"
+                        data={results.column_space}
+                        color="indigo"
+                    />
+                </div>
+                <div style={{ animationDelay: '0.5s' }}>
+                    <SubspaceCard
+                        name="Row Space"
+                        symbol="C(Aᵀ)"
+                        data={results.row_space}
+                        color="purple"
+                    />
+                </div>
+                <div style={{ animationDelay: '0.6s' }}>
+                    <SubspaceCard
+                        name="Null Space"
+                        symbol="N(A)"
+                        data={results.null_space}
+                        color="blue"
+                    />
+                </div>
+                <div style={{ animationDelay: '0.7s' }}>
+                    <SubspaceCard
+                        name="Left Null Space"
+                        symbol="N(Aᵀ)"
+                        data={results.left_null_space}
+                        color="cyan"
+                    />
+                </div>
             </div>
         </div>
     );

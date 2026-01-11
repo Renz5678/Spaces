@@ -1,16 +1,44 @@
-# React + Vite
+# Spaces - Linear Algebra Matrix Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for computing the four fundamental subspaces of linear algebra matrices.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Local Computation**: All matrix calculations are performed in the browser using JavaScript - no backend required
+- **Four Fundamental Subspaces**: Computes Column Space, Row Space, Null Space, and Left Null Space
+- **Exact Arithmetic**: Uses fraction-based computation for precise results
+- **Interactive UI**: Smooth animations and responsive design
+- **Optional Cloud Save**: Save your matrices using Supabase (optional)
 
-## React Compiler
+## Technology Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** + **Vite** for fast development and optimal performance
+- **Custom Matrix Engine**: Pure JavaScript implementation of linear algebra algorithms
+- **KaTeX**: Beautiful mathematical notation rendering
+- **Supabase** (optional): Cloud storage for saved matrices
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. (Optional) Configure Supabase for cloud save functionality:
+   - Copy `.env.example` to `.env`
+   - Add your Supabase credentials
+
+## Architecture
+
+This application runs entirely in the frontend with no backend dependencies for matrix computation. All calculations are performed using:
+
+- **Fraction arithmetic** for exact results
+- **Gaussian elimination** for RREF computation
+- **Basis extraction** algorithms for subspace computation
+
+The optional Supabase integration only handles saving/loading matrices for authenticated users.

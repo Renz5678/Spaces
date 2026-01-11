@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect } from 'react';
-import { API_CONFIG } from '../constants';
+import { computeMatrix, getExamples } from '../utils/matrixComputation.js';
 
 /**
  * Hook for matrix computation and examples management
- * Optimized for memory efficiency with proper cleanup
+ * Uses local frontend computation - no backend required
  */
 export function useMatrix() {
     const [results, setResults] = useState(null);
@@ -11,48 +11,62 @@ export function useMatrix() {
     const [error, setError] = useState(null);
     const [examples, setExamples] = useState([]);
 
-    const fetchExamples = useCallback(async () => {
+    /**
+     * Load example matrices from local data
+     */
+    const fetchExamples = useCallback(() => {
         try {
-            const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.EXAMPLES}`);
-            const data = await res.json();
+            const data = getExamples();
             setExamples(data.examples || []);
         } catch (e) {
-            console.error('Failed to fetch examples:', e);
+            console.error('Failed to load examples:', e);
         }
     }, []);
 
-    const handleCompute = useCallback(async (matrix) => {
+    /**
+     * Compute fundamental spaces locally
+     */
+    const handleCompute = useCallback((matrix) => {
         setIsLoading(true);
         setError(null);
 
-        try {
-            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.COMPUTE}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ matrix }),
-            });
+        // Return a promise for better async handling
+        return new Promise((resolve) => {
+            // Use setTimeout to prevent UI blocking
+            setTimeout(() => {
+                try {
+                    const result = computeMatrix(matrix);
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || 'Computation failed');
-            }
-
-            const data = await response.json();
-            setResults(data);
-            return data;
-        } catch (err) {
-            setError(err.message);
-            return null;
-        } finally {
-            setIsLoading(false);
-        }
+                    if (result.success) {
+                        setResults(result.data);
+                        resolve(result.data);
+                    } else {
+                        setError(result.error);
+                        setResults(null);
+                        resolve(null);
+                    }
+                } catch (err) {
+                    setError(err.message || 'Computation failed');
+                    setResults(null);
+                    resolve(null);
+                } finally {
+                    setIsLoading(false);
+                }
+            }, 100); // Small delay for smooth transition
+        });
     }, []);
 
+    /**
+     * Clear computation results
+     */
     const clearResults = useCallback(() => {
         setResults(null);
         setError(null);
     }, []);
 
+    /**
+     * Cleanup on unmount
+     */
     useEffect(() => {
         return () => {
             setResults(null);
