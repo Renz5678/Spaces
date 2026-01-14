@@ -9,6 +9,8 @@ import './MatrixInput.css';
 const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
     const [rows, setRows] = useState(MATRIX_LIMITS.DEFAULT_ROWS);
     const [cols, setCols] = useState(MATRIX_LIMITS.DEFAULT_COLS);
+    const [rowsInput, setRowsInput] = useState(String(MATRIX_LIMITS.DEFAULT_ROWS));
+    const [colsInput, setColsInput] = useState(String(MATRIX_LIMITS.DEFAULT_COLS));
     const [matrix, setMatrix] = useState(
         Array(MATRIX_LIMITS.DEFAULT_ROWS).fill(null).map(() =>
             Array(MATRIX_LIMITS.DEFAULT_COLS).fill('')
@@ -23,6 +25,8 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
             const initCols = initialMatrix[0]?.length || 0;
             setRows(initRows);
             setCols(initCols);
+            setRowsInput(String(initRows));
+            setColsInput(String(initCols));
             setMatrix(initialMatrix.map(row => row.map(v => String(v))));
         }
     }, [initialMatrix]);
@@ -45,6 +49,8 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
 
         setRows(validated.rows);
         setCols(validated.cols);
+        setRowsInput(String(validated.rows));
+        setColsInput(String(validated.cols));
 
         // Use functional update to ensure we're working with latest state
         setMatrix(prev => {
@@ -52,6 +58,24 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
             return resized;
         });
     }, []);
+
+    const handleRowsInputChange = useCallback((value) => {
+        setRowsInput(value);
+    }, []);
+
+    const handleColsInputChange = useCallback((value) => {
+        setColsInput(value);
+    }, []);
+
+    const handleRowsBlur = useCallback(() => {
+        const parsed = parseInt(rowsInput) || MATRIX_LIMITS.MIN_DIMENSION;
+        handleDimensionChange(parsed, cols);
+    }, [rowsInput, cols, handleDimensionChange]);
+
+    const handleColsBlur = useCallback(() => {
+        const parsed = parseInt(colsInput) || MATRIX_LIMITS.MIN_DIMENSION;
+        handleDimensionChange(rows, parsed);
+    }, [colsInput, rows, handleDimensionChange]);
 
     const handleCellChange = useCallback((i, j, value) => {
         setMatrix(prev => prev.map((row, ri) =>
@@ -105,6 +129,8 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
 
         setRows(exampleRows);
         setCols(exampleCols);
+        setRowsInput(String(exampleRows));
+        setColsInput(String(exampleCols));
         setMatrix(exampleMatrix.map(row => row.map(v => String(v))));
     }, []);
 
@@ -134,8 +160,9 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
                             inputMode="numeric"
                             min={MATRIX_LIMITS.MIN_DIMENSION}
                             max={MATRIX_LIMITS.MAX_DIMENSION}
-                            value={rows}
-                            onChange={(e) => handleDimensionChange(parseInt(e.target.value) || 1, cols)}
+                            value={rowsInput}
+                            onChange={(e) => handleRowsInputChange(e.target.value)}
+                            onBlur={handleRowsBlur}
                             onFocus={(e) => e.target.select()}
                             onClick={(e) => e.target.select()}
                             disabled={isLoading}
@@ -148,8 +175,9 @@ const MatrixInput = ({ onCompute, isLoading, examples, initialMatrix }) => {
                             inputMode="numeric"
                             min={MATRIX_LIMITS.MIN_DIMENSION}
                             max={MATRIX_LIMITS.MAX_DIMENSION}
-                            value={cols}
-                            onChange={(e) => handleDimensionChange(rows, parseInt(e.target.value) || 1)}
+                            value={colsInput}
+                            onChange={(e) => handleColsInputChange(e.target.value)}
+                            onBlur={handleColsBlur}
                             onFocus={(e) => e.target.select()}
                             onClick={(e) => e.target.select()}
                             disabled={isLoading}
